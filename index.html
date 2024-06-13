@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Buttons from JSON</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #333;
+            background-color: #f0f0f0;
+            text-decoration: none;
+            color: #333;
+            flex: 1 1 30%; /* Adjust the width as needed */
+            max-width: 200px; /* Adjust the maximum width as needed */
+        }
+        .button:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic Buttons from JSON</h1>
+
+    <div class="button-container" id="button-container">
+        <!-- Buttons will be dynamically added here -->
+    </div>
+
+    <script>
+        // Define JSON data directly in JavaScript
+        const buttonData = [
+            { "label": "Button 1", "url": "snakeGame/path1" },
+            { "label": "Button 2", "url": "/path2" },
+            { "label": "Button 3", "url": "/path3" },
+            { "label": "Button 4", "url": "/path4" },
+            { "label": "Button 5", "url": "/path5" }
+        ];
+
+        const buttonContainer = document.getElementById('button-container');
+
+        buttonData.forEach((buttonData, index) => {
+            const button = document.createElement('a');
+            button.setAttribute('href', buttonData.url);
+            button.setAttribute('class', 'button');
+            button.textContent = buttonData.label;
+
+            buttonContainer.appendChild(button);
+
+            // Show only 2 buttons per row on mobile devices
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                button.style.flex = '1 1 45%'; // Adjust width for mobile view
+                if ((index + 1) % 2 === 0) {
+                    button.style.marginRight = '0'; // Remove margin for every second button
+                }
+            }
+        });
+    </script>
+</body>
+</html>
