@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game</title> 
+    <title>Classic Snake Game - Play Online for Free</title>
+    <meta name="description" content="Play the classic Snake game online for free. Enjoy hours of fun with our snake game, featuring smooth controls and responsive gameplay.">
+    <meta name="keywords" content="Snake game, play Snake, online Snake game, free Snake game, classic Snake game">
+    <meta name="author" content="Sainath Nale">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,7 +15,7 @@
         <div class="controls">
             <button id="startButton">Start Game</button>
             <button id="pauseButton" disabled>Pause</button>
-            <button id="restartButton" disabled>Restart</button>
+            <button id="stopButton" disabled>Stop</button>
             <div class="score">Score: <span id="score">0</span></div>
         </div>
         <div class="mobile-controls">
@@ -24,6 +27,19 @@
             <button class="arrow" id="downArrow">↓</button>
         </div>
     </div>
+    <audio id="backgroundMusic" loop style="display: none;">
+        <source src="../background.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     <script src="script.js"></script>
+    <script>
+        document.getElementById('startButton').addEventListener('click', function() {
+            var music = document.getElementById('backgroundMusic');
+            music.play().catch(error => {
+                console.log('Autoplay was prevented, manual play required.');
+            });
+        });
+    </script>
 </body>
 </html>
+

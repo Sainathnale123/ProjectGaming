@@ -2,7 +2,7 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const startButton = document.getElementById("startButton");
 const pauseButton = document.getElementById("pauseButton");
-const restartButton = document.getElementById("restartButton");
+const stopButton = document.getElementById("stopButton");
 const scoreDisplay = document.getElementById("score");
 
 const upArrow = document.getElementById("upArrow");
@@ -11,7 +11,7 @@ const leftArrow = document.getElementById("leftArrow");
 const rightArrow = document.getElementById("rightArrow");
 
 canvas.width = 400;
-canvas.height = 400;
+canvas.height = 500;
 
 const box = 20;
 let snake = [{x: 9 * box, y: 10 * box}];
@@ -27,7 +27,7 @@ let paused = true; // Game starts paused
 document.addEventListener("keydown", changeDirection);
 startButton.addEventListener("click", startGame);
 pauseButton.addEventListener("click", togglePause);
-restartButton.addEventListener("click", restartGame);
+stopButton.addEventListener("click", stopGame);
 
 upArrow.addEventListener("click", () => setDirection("UP"));
 downArrow.addEventListener("click", () => setDirection("DOWN"));
@@ -77,6 +77,7 @@ function draw() {
     if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width || snakeY >= canvas.height || collision(newHead, snake)) {
         clearInterval(game);
         alert("Game Over");
+        stopGame();
     }
 
     snake.unshift(newHead);
@@ -111,7 +112,7 @@ function startGame() {
     paused = false;
     startButton.disabled = true;
     pauseButton.disabled = false;
-    restartButton.disabled = false;
+    stopButton.disabled = false;
 
     score = 0;
     scoreDisplay.textContent = score;
@@ -122,7 +123,7 @@ function startGame() {
         y: Math.floor(Math.random() * 19 + 1) * box
     };
 
-    game = setInterval(draw, 150); // Adjusted snake speed to 150ms
+    game = setInterval(draw, 210); // Adjusted snake speed to 210ms
 }
 
 function togglePause() {
@@ -130,10 +131,20 @@ function togglePause() {
     pauseButton.textContent = paused ? "Resume" : "Pause";
 }
 
-function restartGame() {
+function stopGame() {
     clearInterval(game);
     paused = true;
     startButton.disabled = false;
     pauseButton.disabled = true;
-    restartButton.disabled = true;
+    stopButton.disabled = true;
+    stopBackgroundMusic();
+    redirectToHomePage();
+}
+function stopBackgroundMusic() {
+    const music = document.getElementById('backgroundMusic');
+    music.pause();
+}
+function redirectToHomePage() {
+    // Replace with your home page URL or desired action
+    window.location.href = 'index.html'; // Example URL
 }
