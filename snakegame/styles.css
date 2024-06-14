@@ -9,7 +9,12 @@ body, html {
     justify-content: center;
     align-items: center;
     background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;touch-action: manipulation; 
+    user-select: none; 
+    -ms-content-zooming: none; 
+    -ms-touch-action: manipulation; 
+    -webkit-touch-callout: none; /* Disable callout (context menu) on long-tap */
+    -webkit-user-select: none; /* Disable text selection on double-tap */
 }
 
 .game-container {

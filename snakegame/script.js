@@ -24,6 +24,21 @@ let food = {
 let game;
 let paused = true; // Game starts paused
 
+let lastTouchTime = 0;
+
+document.addEventListener('touchstart', function(event) {
+    let now = new Date().getTime();
+    if (now - lastTouchTime <= 300) {
+        event.preventDefault();
+    }
+    lastTouchTime = now;
+}, { passive: false });
+
+// Prevent zooming on click for non-touch devices
+document.addEventListener('click', function(event) {
+    event.preventDefault();
+}, { passive: false });
+
 document.addEventListener("keydown", changeDirection);
 startButton.addEventListener("click", startGame);
 pauseButton.addEventListener("click", togglePause);
