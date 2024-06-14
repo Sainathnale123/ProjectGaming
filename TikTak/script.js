@@ -64,3 +64,9 @@ function resetGame() {
     message.innerText = `Player ${currentPlayer}'s turn`;
     document.querySelector('.popup').remove();
 }
+document.addEventListener('click', function() {
+    var music = document.getElementById('backgroundMusic');
+    music.play().catch(error => {
+        console.log('Autoplay was prevented, manual play required.');
+    });
+});
